@@ -26,15 +26,16 @@ export const SCalendar = styled(Stack)`
       background: transparent;
     }
     &.active button {
-      background: red;
+      /*background: orange;*/
     }
     &.today button {
       background: #a9d0ff;
     }
   }
-  .today {
+  .today,
+  .active {
+    /*color: red;*/
   }
-
   .offset {
     position: absolute;
     left: 0;

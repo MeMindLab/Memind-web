@@ -1,5 +1,5 @@
-import { Box, Button, Divider, Flex, Text } from "@chakra-ui/react";
-import { IconCalChevronLeft, IconCalChevronRight, IconPen } from "../icons";
+import { Box, Button, Divider, Flex, Text, Stack } from "@chakra-ui/react";
+import { IconCalChevronLeft, IconCalChevronRight } from "../icons";
 import { SCalendar } from "./styles";
 import { useCalendar } from "../../lib/hooks/useCalendar";
 
@@ -23,42 +23,58 @@ export const MainCalendar = ({
     onViewChange,
   });
 
-  console.log(monthStr, "mon st");
-
   return (
-    <Box margin={0} mx="auto" padding={0} borderRadius="50px">
-      <SCalendar spacing={0}>
-        <Box p="xs">
+    <Box
+      margin={0}
+      padding={0}
+      borderRadius={4}
+      bg="white"
+      shadow="0px 4px 4px 0px rgba(212, 215, 225, 0.23)"
+    >
+      <SCalendar spacing={0} p={0} m={0}>
+        <Box p={3} pr={0}>
           <Flex justify="space-between">
             <Text fontWeight={500}>{monthStr}</Text>
 
-            <Flex>
+            <Box>
               <Button
+                p={0}
+                m={0}
                 bgColor="transparent"
+                cursor="default"
+                _hover={{ bgColor: "transparent" }}
                 onClick={handlers.prevMonth}
                 size="sm"
               >
                 <IconCalChevronLeft />
               </Button>
+
               <Button
+                m={0}
+                p={0}
                 bgColor="transparent"
+                cursor="default"
+                _hover={{ bgColor: "transparent" }}
                 onClick={handlers.nextMonth}
                 size="sm"
               >
                 <IconCalChevronRight />
               </Button>
-            </Flex>
+            </Box>
           </Flex>
         </Box>
 
-        <Flex justify="space-between" wrap="nowrap">
+        <Flex justifyContent="space-between" wrap="nowrap" mb={3} px={3}>
           {dayStrs.map((d, i) => (
             <Text key={d} color={i === 0 ? "red" : undefined} fontSize="sm">
               {d}
             </Text>
           ))}
         </Flex>
-        <Divider color="gray.6" mx="xs" />
+        <Stack mx={4}>
+          <Divider />
+        </Stack>
+
         {dates.map((week, i) => (
           <Flex key={i} justify="space-between" wrap="nowrap">
             {week.map(({ date, isCurrentMonth, iso, isToday, active }) =>
@@ -76,12 +92,13 @@ export const MainCalendar = ({
                   <Button
                     size="sm"
                     borderRadius="50%"
-                    padding={0}
+                    m={0}
+                    p={0}
                     data-iso={iso}
                     onClick={handlers.handleDateClick}
                   >
                     {active ? (
-                      <IconPen />
+                      <Box>active 아이콘</Box>
                     ) : (
                       <Text fontSize={18} className={isToday ? "today" : ""}>
                         {date}
