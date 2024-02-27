@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 declare global {
   interface Window {
     flutter_inappwebview: any;
@@ -5,14 +7,26 @@ declare global {
 }
 
 const FlutterJsChannel = () => {
-  return (
-    <script
-      dangerouslySetInnerHTML={{
-        __html:
-          'window.addEventListener("flutterInAppWebViewPlatformReady", function(event) { localStorage.setItem("trash", "webview"); })',
-      }}
-    />
-  );
+  useEffect(() => {
+    const handlePlatformReady = () => {
+      localStorage.setItem("emotion", "webview");
+      localStorage.setItem("trash", "webview");
+    };
+
+    window.addEventListener(
+      "flutterInAppWebViewPlatformReady",
+      handlePlatformReady
+    );
+
+    return () => {
+      window.removeEventListener(
+        "flutterInAppWebViewPlatformReady",
+        handlePlatformReady
+      );
+    };
+  }, []);
+
+  return null;
 };
 
 export default FlutterJsChannel;
