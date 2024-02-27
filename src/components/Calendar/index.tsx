@@ -1,5 +1,17 @@
-import { Box, Button, Divider, Flex, Text, Stack } from "@chakra-ui/react";
-import { IconCalChevronLeft, IconCalChevronRight } from "../icons";
+import {
+  Box,
+  Button,
+  Divider,
+  Flex,
+  Text,
+  Stack,
+  HStack,
+} from "@chakra-ui/react";
+import {
+  IconCalChevronLeft,
+  IconCalChevronRight,
+  IconCalChevronBelow,
+} from "../icons";
 import { SCalendar } from "./styles";
 import { useCalendar } from "../../lib/hooks/useCalendar";
 
@@ -32,15 +44,23 @@ export const MainCalendar = ({
       shadow="0px 4px 4px 0px rgba(212, 215, 225, 0.23)"
     >
       <SCalendar spacing={0} p={0} m={0}>
-        <Box p={3} pr={0}>
+        <Box p={4}>
           <Flex justify="space-between">
-            <Text fontWeight={500}>{monthStr}</Text>
+            <Button padding={2} borderRadius={50}>
+              <Text fontWeight={500} marginRight="4px">
+                {monthStr}
+              </Text>
+              <IconCalChevronBelow />
+            </Button>
 
-            <Box>
+            <HStack spacing={2}>
               <Button
                 p={0}
                 m={0}
-                bgColor="transparent"
+                w="36px"
+                h="36px"
+                bg="#DCE1F0" //b4 color
+                borderRadius="50%"
                 cursor="default"
                 _hover={{ bgColor: "transparent" }}
                 onClick={handlers.prevMonth}
@@ -52,15 +72,18 @@ export const MainCalendar = ({
               <Button
                 m={0}
                 p={0}
-                bgColor="transparent"
+                w="36px"
+                h="36px"
+                bg="#DCE1F0" //b4 color
                 cursor="default"
+                borderRadius="50%"
                 _hover={{ bgColor: "transparent" }}
                 onClick={handlers.nextMonth}
                 size="sm"
               >
                 <IconCalChevronRight />
               </Button>
-            </Box>
+            </HStack>
           </Flex>
         </Box>
 

@@ -28,14 +28,11 @@ export const useCalendar = (options: Options) => {
 
   const today = useMemo(() => dayjs(), []);
 
-  console.log("---------------------");
-  console.log(today, "today");
-
   const startOfWeeks = useMemo(
     () => dayjs(viewDate).startOf("M").startOf("w"),
     [viewDate]
   );
-  console.log(startOfWeeks, "startOfWeeks");
+
   const monthStr = useMemo(() => viewDate.format("YYYY.MM"), [viewDate]);
 
   const dayStrs = useMemo(() => ["일", "월", "화", "수", "목", "금", "토"], []);

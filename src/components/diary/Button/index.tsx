@@ -1,4 +1,4 @@
-import { Box, Button, Text } from "@chakra-ui/react";
+import { Box, Button } from "@chakra-ui/react";
 import { ReactNode, MouseEvent } from "react";
 
 interface DiaryButtonProps {

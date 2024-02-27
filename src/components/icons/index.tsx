@@ -69,3 +69,15 @@ export const IconCalChevronRight = () => (
     />
   </svg>
 );
+
+export const IconCalChevronBelow = () => (
+  <svg width="18" height="18" fill="none">
+    <path
+      stroke="#626262"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      d="m3 6 6 6 6-6"
+    />
+  </svg>
+);
