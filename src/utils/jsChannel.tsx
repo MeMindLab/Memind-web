@@ -7,23 +7,36 @@ declare global {
 }
 
 const FlutterJsChannel = () => {
+  const handlePlatformReady = () => {
+    localStorage.setItem("emotion", "button");
+    localStorage.setItem("trash", "webview");
+  };
+
   useEffect(() => {
-    const handlePlatformReady = () => {
-      localStorage.setItem("emotion", "webview");
-      localStorage.setItem("trash", "webview");
-    };
+    if (window.flutter_inappwebview?.isPlatformReady) {
+      handlePlatformReady();
+    } else {
+      const eventListener = () => {
+        handlePlatformReady();
 
-    window.addEventListener(
-      "flutterInAppWebViewPlatformReady",
-      handlePlatformReady
-    );
+        window.removeEventListener(
+          "flutterInAppWebViewPlatformReady",
+          eventListener
+        );
+      };
 
-    return () => {
-      window.removeEventListener(
+      window.addEventListener(
         "flutterInAppWebViewPlatformReady",
-        handlePlatformReady
+        eventListener
       );
-    };
+
+      return () => {
+        window.removeEventListener(
+          "flutterInAppWebViewPlatformReady",
+          eventListener
+        );
+      };
+    }
   }, []);
 
   return null;

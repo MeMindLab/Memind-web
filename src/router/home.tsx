@@ -10,16 +10,27 @@ export default function EmotionMain() {
     if (localStorage.getItem("trash") === "webview") {
       if (window && window.flutter_inappwebview) {
         window.flutter_inappwebview
-          .callHandler("clickTrash")
+          .callHandler("clickTrash", "trashButton")
           .then((arg: any) => {
             console.log(arg);
-            console.log("웹!");
           });
       }
     }
   };
 
-  const handleDiary = () => {};
+  const handleDiary = () => {
+    console.log("Click Diary button");
+
+    if (localStorage.getItem("emotion") === "webview") {
+      if (window && window.flutter_inappwebview) {
+        window.flutter_inappwebview
+          .callHandler("clickDiary", "diaryButton")
+          .then((arg: any) => {
+            console.log(arg);
+          });
+      }
+    }
+  };
 
   return (
     <Box h="100vh" p={5} bgColor="mainBg">
