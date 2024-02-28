@@ -3,32 +3,34 @@ import DiaryButton from "../components/diary/Button";
 import { IconPen, IconTrashCan } from "../components/icons";
 import { MainCalendar } from "../components/Calendar";
 
+declare global {
+  interface Window {
+    flutter_inappwebview: any;
+  }
+}
+
 export default function EmotionMain() {
   const handleTrash = () => {
     console.log("Click Trash Button");
 
-    if (localStorage.getItem("trash") === "webview") {
-      if (window && window.flutter_inappwebview) {
-        window.flutter_inappwebview
-          .callHandler("clickTrash", "trashButton")
-          .then((arg: any) => {
-            console.log(arg);
-          });
-      }
+    if (window && window.flutter_inappwebview) {
+      window.flutter_inappwebview
+        .callHandler("clickTrash", "trashButton")
+        .then((arg: any) => {
+          console.log(arg);
+        });
     }
   };
 
   const handleDiary = () => {
     console.log("Click Diary button");
 
-    if (localStorage.getItem("emotion") === "webview") {
-      if (window && window.flutter_inappwebview) {
-        window.flutter_inappwebview
-          .callHandler("clickDiary", "diaryButton")
-          .then((arg: any) => {
-            console.log(arg);
-          });
-      }
+    if (window && window.flutter_inappwebview) {
+      window.flutter_inappwebview
+        .callHandler("clickDiary", "diaryButton")
+        .then((arg: any) => {
+          console.log(arg);
+        });
     }
   };
 
