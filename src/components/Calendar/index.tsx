@@ -11,6 +11,9 @@ import {
   IconCalChevronLeft,
   IconCalChevronRight,
   IconCalChevronBelow,
+  IconEmotionHappiness,
+  IconHappiness,
+  IconComfort,
 } from "../icons";
 import { SCalendar } from "./styles";
 import { useCalendar } from "../../lib/hooks/useCalendar";
@@ -104,7 +107,7 @@ export const MainCalendar = ({
             key={i}
             justify="space-around"
             wrap="nowrap"
-            mb={i === dates.length - 1 ? "33px" : "22px"}
+            mb={i === dates.length - 1 ? "33px" : "24px"}
             mt={i === 0 ? "10px" : "0"}
           >
             {week.map(({ date, isCurrentMonth, iso, isToday, active }) =>
@@ -120,7 +123,9 @@ export const MainCalendar = ({
                   ].join(" ")}
                 >
                   <Button
-                    size="sm"
+                    w="28px"
+                    h="28px"
+                    minW="28px"
                     borderRadius="50%"
                     m={0}
                     p={0}
@@ -132,7 +137,7 @@ export const MainCalendar = ({
                   {active && (
                     <Box
                       className={["offset", isToday ? "today" : ""].join(" ")}
-                    ></Box>
+                    />
                   )}
                 </div>
               )

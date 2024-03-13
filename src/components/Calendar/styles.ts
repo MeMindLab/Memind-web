@@ -4,11 +4,12 @@ import { Stack } from "@chakra-ui/react";
 export const SCalendar = styled(Stack)`
   overflow: hidden;
   .cell {
+    width: 28px;
+    height: 28px;
     position: relative;
     border-radius: 50%;
     &,
     button {
-      width: 28px;
       background: transparent;
     }
 
@@ -19,7 +20,7 @@ export const SCalendar = styled(Stack)`
 
   .offset {
     position: absolute;
-    left: 12px;
+    left: 11px;
     bottom: -11px;
     text-align: center;
     z-index: 1;
@@ -28,5 +29,11 @@ export const SCalendar = styled(Stack)`
     width: 7px;
     height: 7px;
     border-radius: 50%;
+  }
+
+  .icon {
+    position: absolute;
+    left: 2px;
+    bottom: -24px;
   }
 ` as unknown as typeof Stack;

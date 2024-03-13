@@ -1,3 +1,10 @@
+import emotionHappiness from "../../assets/icon/emotion/happiness.png";
+import emotionAnger from "../../assets/icon/emotion/anger.png";
+import emotionEnjoy from "../../assets/icon/emotion/enjoy.png";
+import emotinoComfort from "../../assets/icon/emotion/comfort.png";
+import emotionPessimism from "../../assets/icon/emotion/Pessimism.png";
+import emotionApathy from "../../assets/icon/emotion/apathy.png";
+
 export const IconPen = () => (
   <svg width="32" height="33" fill="none">
     <path
@@ -80,4 +87,19 @@ export const IconCalChevronBelow = () => (
       d="m3 6 6 6 6-6"
     />
   </svg>
+);
+
+export const IconHappiness = () => (
+  <img src={emotionHappiness} alt="Happniess Icon" />
+);
+export const IconComfort = () => (
+  <img src={emotinoComfort} alt="Happniess Icon" />
+);
+export const IconEnjoy = () => <img src={emotionEnjoy} alt="Happniess Icon" />;
+export const IconAnger = () => <img src={emotionAnger} alt="Happniess Icon" />;
+export const IconPessimism = () => (
+  <img src={emotionPessimism} alt="Happniess Icon" />
+);
+export const IconApathy = () => (
+  <img src={emotionApathy} alt="Happniess Icon" />
 );
