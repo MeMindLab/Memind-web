@@ -46,7 +46,7 @@ export const MainCalendar = ({
       shadow="0px 4px 4px 0px rgba(212, 215, 225, 0.23)"
     >
       <SCalendar spacing={0} p={0} m={0}>
-        <Box p={4}>
+        <Box py="14px" px="19px" paddingLeft="18px">
           <Flex justify="space-between">
             <Button h="36px" py="7px" paddingLeft="9px" borderRadius={50}>
               <Text fontWeight={600} marginRight="4px" color="#626262">
