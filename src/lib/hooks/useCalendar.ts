@@ -52,7 +52,8 @@ export const useCalendar = (options: Options) => {
         const iso = dt.format("YYYY-MM-DD");
         const isPast = dt.isBefore(today, "day");
         const isToday = dt.isSame(today, "day");
-        const active = !!activeDates?.includes(iso);
+        //const active = !!activeDates?.includes(iso);
+        const active = true;
         week.push({ date, day, iso, isCurrentMonth, isPast, isToday, active });
         // advance to next day
         dt = dt.add(1, "d");

@@ -3,46 +3,30 @@ import { Stack } from "@chakra-ui/react";
 
 export const SCalendar = styled(Stack)`
   overflow: hidden;
-  .header {
-    flex: 1 0 auto;
-  }
-  .th {
-    width: 48px;
-    text-align: center;
-    font-weight: 600;
-  }
   .cell {
-    flex: 0 0 auto;
-
-    line-height: 2rem;
-    text-align: center;
-    font-weight: 600;
     position: relative;
     border-radius: 50%;
     &,
     button {
-      width: 48px;
-      height: 48px;
+      width: 28px;
       background: transparent;
     }
-    &.active button {
-      /*background: orange;*/
-    }
+
     &.today button {
       background: #a9d0ff;
     }
   }
-  .today,
-  .active {
-    /*color: red;*/
-  }
+
   .offset {
     position: absolute;
-    left: 0;
-    right: 0;
+    left: 12px;
+    bottom: -11px;
     text-align: center;
-    bottom: -0.3rem;
     z-index: 1;
     pointer-events: none;
+    background: #a9d0ff;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
   }
 ` as unknown as typeof Stack;

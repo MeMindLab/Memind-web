@@ -41,7 +41,7 @@ export const MainCalendar = ({
     <Box
       margin={0}
       padding={0}
-      borderRadius={4}
+      borderRadius={13}
       bg="white"
       shadow="0px 4px 4px 0px rgba(212, 215, 225, 0.23)"
     >
@@ -83,19 +83,30 @@ export const MainCalendar = ({
           </Flex>
         </Box>
 
-        <Flex justifyContent="space-between" wrap="nowrap" mb={3} px="19px">
+        <Flex justifyContent="space-between" wrap="nowrap" mb="2" px="19px">
           {dayStrs.map((d, i) => (
             <Text key={d} color={i === 0 ? "red" : "#313131"} fontWeight={500}>
               {d}
             </Text>
           ))}
         </Flex>
+
         <Stack mx="19px">
-          <Divider />
+          <Divider
+            variant="solid"
+            borderWidth="1px"
+            color={`linear-gradient(0deg, #CCC 0%, #CCC 100%), #FFF`}
+          />
         </Stack>
 
         {dates.map((week, i) => (
-          <Flex key={i} justify="space-between" wrap="nowrap">
+          <Flex
+            key={i}
+            justify="space-around"
+            wrap="nowrap"
+            mb={i === dates.length - 1 ? "33px" : "22px"}
+            mt={i === 0 ? "10px" : "0"}
+          >
             {week.map(({ date, isCurrentMonth, iso, isToday, active }) =>
               !isCurrentMonth ? (
                 <div className="cell" key={iso} />
@@ -116,21 +127,12 @@ export const MainCalendar = ({
                     data-iso={iso}
                     onClick={handlers.handleDateClick}
                   >
-                    {active ? (
-                      <Box>active 아이콘</Box>
-                    ) : (
-                      <Text fontSize={18} className={isToday ? "today" : ""}>
-                        {date}
-                      </Text>
-                    )}
+                    <Text className={isToday ? "today" : ""}>{date}</Text>
                   </Button>
                   {active && (
-                    <Text
+                    <Box
                       className={["offset", isToday ? "today" : ""].join(" ")}
-                      fontSize={14}
-                    >
-                      {date}
-                    </Text>
+                    ></Box>
                   )}
                 </div>
               )

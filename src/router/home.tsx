@@ -35,8 +35,8 @@ export default function EmotionMain() {
   };
 
   return (
-    <Box h="100vh" p={5} bgColor="mainBg">
-      <Flex direction="column" gap={3}>
+    <Box p={5} bgColor="mainBg">
+      <Flex direction="column" gap="10px">
         <Container p={0}>
           <MainCalendar
             onDateSelect={function (): void {
