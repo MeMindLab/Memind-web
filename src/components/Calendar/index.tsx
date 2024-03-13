@@ -35,6 +35,8 @@ export const MainCalendar = ({
     onViewChange,
   });
 
+  console.log(dayStrs);
+
   return (
     <Box
       margin={0}
@@ -46,8 +48,8 @@ export const MainCalendar = ({
       <SCalendar spacing={0} p={0} m={0}>
         <Box p={4}>
           <Flex justify="space-between">
-            <Button padding={2} borderRadius={50}>
-              <Text fontWeight={500} marginRight="4px">
+            <Button h="36px" py="7px" paddingLeft="9px" borderRadius={50}>
+              <Text fontWeight={600} marginRight="4px" color="#626262">
                 {monthStr}
               </Text>
               <IconCalChevronBelow />
@@ -57,12 +59,9 @@ export const MainCalendar = ({
               <Button
                 p={0}
                 m={0}
-                w="36px"
-                h="36px"
                 bg="#DCE1F0" //b4 color
                 borderRadius="50%"
                 cursor="default"
-                _hover={{ bgColor: "transparent" }}
                 onClick={handlers.prevMonth}
                 size="sm"
               >
@@ -72,12 +71,9 @@ export const MainCalendar = ({
               <Button
                 m={0}
                 p={0}
-                w="36px"
-                h="36px"
                 bg="#DCE1F0" //b4 color
                 cursor="default"
                 borderRadius="50%"
-                _hover={{ bgColor: "transparent" }}
                 onClick={handlers.nextMonth}
                 size="sm"
               >
@@ -87,14 +83,14 @@ export const MainCalendar = ({
           </Flex>
         </Box>
 
-        <Flex justifyContent="space-between" wrap="nowrap" mb={3} px={3}>
+        <Flex justifyContent="space-between" wrap="nowrap" mb={3} px="19px">
           {dayStrs.map((d, i) => (
-            <Text key={d} color={i === 0 ? "red" : undefined} fontSize="sm">
+            <Text key={d} color={i === 0 ? "red" : "#313131"} fontWeight={500}>
               {d}
             </Text>
           ))}
         </Flex>
-        <Stack mx={4}>
+        <Stack mx="19px">
           <Divider />
         </Stack>
 
