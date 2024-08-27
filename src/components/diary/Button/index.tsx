@@ -22,21 +22,27 @@ const DiaryButton: React.FC<DiaryButtonProps> = ({
         position="relative"
         bg={color ? color : "pointColor"}
         minWidth={172}
-        h={114}
+        h={104}
         p={0}
-        paddingTop="12px"
-        px={4}
+        paddingTop="13px"
+        px={5}
         textAlign="justify"
-        fontSize={14}
+        fontSize={18}
         fontWeight={400}
         whiteSpace="pre"
         onClick={onClick}
         borderRadius={13}
         boxShadow="0px 4px 4px 0px #d4d7e13b"
+        sx={{
+          _hover: {
+            bg: color ? color : "pointColor",
+            color: "inherit",
+          },
+        }}
       >
         {children}
 
-        <Box position="absolute" top={68} right={4}>
+        <Box position="absolute" top={42} right={0}>
           {icon}
         </Box>
       </Button>

@@ -1,12 +1,23 @@
 import dayjs, { Dayjs } from "dayjs";
 import { MouseEvent, useMemo, useState } from "react";
 
+export type ActiveDate = {
+  date: string;
+  emotion?:
+    | "happy"
+    | "joyful"
+    | "comfortable"
+    | "sad"
+    | "annoyed"
+    | "lethargic";
+};
+
 type Options =
   | {
       initialDateStr?: string;
       onViewChange?(dtStr: string): void;
       onDateSelect?(dtStr: string): void;
-      activeDates?: string[];
+      activeDates?: ActiveDate[];
     }
   | undefined;
 
@@ -18,6 +29,13 @@ type Day = {
   isCurrentMonth: boolean;
   isToday: boolean;
   active: boolean;
+  emotion?:
+    | "happy"
+    | "joyful"
+    | "comfortable"
+    | "sad"
+    | "annoyed"
+    | "lethargic";
 };
 
 export const useCalendar = (options: Options) => {
@@ -27,6 +45,7 @@ export const useCalendar = (options: Options) => {
   const [viewDate, setViewDate] = useState<Dayjs>(dayjs(initialDateStr));
 
   const today = useMemo(() => dayjs(), []);
+  console.log(today);
 
   const startOfWeeks = useMemo(
     () => dayjs(viewDate).startOf("M").startOf("w"),
@@ -52,9 +71,22 @@ export const useCalendar = (options: Options) => {
         const iso = dt.format("YYYY-MM-DD");
         const isPast = dt.isBefore(today, "day");
         const isToday = dt.isSame(today, "day");
-        //const active = !!activeDates?.includes(iso);
-        const active = true;
-        week.push({ date, day, iso, isCurrentMonth, isPast, isToday, active });
+
+        const emotion = activeDates?.find((ad) => ad.date === iso)?.emotion; // Assuming activeDates has emotion
+        const activeDate = activeDates?.find((ad) => ad.date === iso);
+
+        const active = !!activeDate;
+
+        week.push({
+          date,
+          day,
+          iso,
+          isCurrentMonth,
+          isPast,
+          isToday,
+          active,
+          emotion,
+        });
         // advance to next day
         dt = dt.add(1, "d");
       }

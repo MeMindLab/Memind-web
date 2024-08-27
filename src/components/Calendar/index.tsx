@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Box,
   Button,
@@ -11,18 +12,30 @@ import {
   IconCalChevronLeft,
   IconCalChevronRight,
   IconCalChevronBelow,
-  IconEmotionHappiness,
-  IconHappiness,
-  IconComfort,
+  IconHappy,
+  IconJoyful,
+  IconSad,
+  IconLethargic,
+  IconComfortable,
+  IconAnnoyed,
 } from "../icons";
 import { SCalendar } from "./styles";
-import { useCalendar } from "../../lib/hooks/useCalendar";
+import { useCalendar, ActiveDate } from "../../lib/hooks/useCalendar";
+
+const emotionIcons = {
+  happy: IconHappy,
+  joyful: IconJoyful,
+  comfortable: IconComfortable,
+  sad: IconSad,
+  annoyed: IconAnnoyed,
+  lethargic: IconLethargic,
+};
 
 type Props = {
   initialDateStr?: string;
   onDateSelect(dateStr: string): void;
   onViewChange?: (monthStr: string) => void;
-  activeDates?: string[];
+  activeDates?: ActiveDate[];
 };
 
 export const MainCalendar = ({
@@ -51,7 +64,18 @@ export const MainCalendar = ({
       <SCalendar spacing={0} p={0} m={0}>
         <Box py="14px" px="19px" paddingLeft="18px">
           <Flex justify="space-between">
-            <Button h="36px" py="7px" paddingLeft="9px" borderRadius={50}>
+            <Button
+              h="36px"
+              py="7px"
+              paddingLeft="9px"
+              borderRadius={50}
+              bg={"buttonColor"}
+              sx={{
+                _hover: {
+                  color: "inherit",
+                },
+              }}
+            >
               <Text fontWeight={600} marginRight="4px" color="#626262">
                 {monthStr}
               </Text>
@@ -62,11 +86,16 @@ export const MainCalendar = ({
               <Button
                 p={0}
                 m={0}
-                bg="#DCE1F0" //b4 color
+                bg={"buttonColor"}
                 borderRadius="50%"
                 cursor="default"
                 onClick={handlers.prevMonth}
                 size="sm"
+                sx={{
+                  _hover: {
+                    color: "inherit",
+                  },
+                }}
               >
                 <IconCalChevronLeft />
               </Button>
@@ -74,11 +103,16 @@ export const MainCalendar = ({
               <Button
                 m={0}
                 p={0}
-                bg="#DCE1F0" //b4 color
+                bg={"buttonColor"}
                 cursor="default"
                 borderRadius="50%"
                 onClick={handlers.nextMonth}
                 size="sm"
+                sx={{
+                  _hover: {
+                    color: "inherit",
+                  },
+                }}
               >
                 <IconCalChevronRight />
               </Button>
@@ -102,48 +136,60 @@ export const MainCalendar = ({
           />
         </Stack>
 
-        {dates.map((week, i) => (
-          <Flex
-            key={i}
-            justify="space-around"
-            wrap="nowrap"
-            mb={i === dates.length - 1 ? "33px" : "24px"}
-            mt={i === 0 ? "10px" : "0"}
-          >
-            {week.map(({ date, isCurrentMonth, iso, isToday, active }) =>
-              !isCurrentMonth ? (
-                <div className="cell" key={iso} />
-              ) : (
-                <div
-                  key={iso}
-                  className={[
-                    "cell",
-                    active ? "active" : "",
-                    isToday ? "today" : "",
-                  ].join(" ")}
-                >
-                  <Button
-                    w="28px"
-                    h="28px"
-                    minW="28px"
-                    borderRadius="50%"
-                    m={0}
-                    p={0}
-                    data-iso={iso}
-                    onClick={handlers.handleDateClick}
-                  >
-                    <Text className={isToday ? "today" : ""}>{date}</Text>
-                  </Button>
-                  {active && (
-                    <Box
-                      className={["offset", isToday ? "today" : ""].join(" ")}
-                    />
-                  )}
-                </div>
-              )
-            )}
-          </Flex>
-        ))}
+        {dates.map((week, i) => {
+          console.log("Week:", week);
+          return (
+            <Flex
+              key={i}
+              justify="space-around"
+              wrap="nowrap"
+              mb={i === dates.length - 1 ? "33px" : "24px"}
+              mt={i === 0 ? "10px" : "0"}
+            >
+              {week.map(
+                ({ date, isCurrentMonth, iso, isToday, active, emotion }) =>
+                  !isCurrentMonth ? (
+                    <div className="cell" key={iso} />
+                  ) : (
+                    <div
+                      key={iso}
+                      className={[
+                        "cell",
+                        active ? "active" : "",
+                        isToday ? "today" : "",
+                      ].join(" ")}
+                    >
+                      <Button
+                        w="28px"
+                        h="28px"
+                        minW="28px"
+                        borderRadius="50%"
+                        m={0}
+                        p={0}
+                        data-iso={iso}
+                        onClick={handlers.handleDateClick}
+                      >
+                        <Text className={isToday ? "today" : ""}>{date}</Text>
+                      </Button>
+
+                      {active && (
+                        <Box
+                          className={
+                            emotion
+                              ? "icon" // 감정이 있을 때는 "icon" 클래스를 추가
+                              : ["offset", isToday ? "today" : ""].join(" ")
+                          }
+                        >
+                          {emotion &&
+                            React.createElement(emotionIcons[emotion])}
+                        </Box>
+                      )}
+                    </div>
+                  )
+              )}
+            </Flex>
+          );
+        })}
       </SCalendar>
     </Box>
   );

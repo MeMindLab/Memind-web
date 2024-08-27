@@ -1,6 +1,7 @@
-import { Container, Box, Flex, HStack } from "@chakra-ui/react";
+import { Container, Box, Flex, HStack, Text } from "@chakra-ui/react";
+
 import DiaryButton from "../components/diary/Button";
-import { IconPen, IconTrashCan } from "../components/icons";
+import { IconPen, IconTrashCan, RightArrowIcon } from "../components/icons";
 import { MainCalendar } from "../components/Calendar";
 
 declare global {
@@ -45,15 +46,21 @@ export default function EmotionMain() {
           />
         </Container>
         <HStack spacing="9px">
+          <DiaryButton onClick={handleTrash} icon={<IconPen />}>
+            <Flex>
+              <Text lineHeight={"25px"}>일기 쓰기</Text>
+              <RightArrowIcon />
+            </Flex>
+          </DiaryButton>
           <DiaryButton
-            onClick={handleTrash}
+            onClick={handleDiary}
             color="white"
             icon={<IconTrashCan />}
           >
-            지금 당장 쏟아내고픈{"\n"}감정이 있나요?
-          </DiaryButton>
-          <DiaryButton onClick={handleDiary} icon={<IconPen />}>
-            오늘의 기억을 {"\n"}이야기해주세요!
+            <Flex>
+              <Text lineHeight={"25px"}>감정 쓰레기통</Text>
+              <RightArrowIcon />
+            </Flex>
           </DiaryButton>
         </HStack>
       </Flex>

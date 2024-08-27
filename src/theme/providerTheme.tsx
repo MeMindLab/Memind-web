@@ -11,9 +11,10 @@ const theme = extendTheme({
   colors,
   semanticTokens: {
     colors: {
-      pointColor: colors.babyYellow,
+      pointColor: colors.babyBlue,
       dateColor: colors.babyBlue,
-      mainBg: colors.solitude,
+      mainBg: colors.blue1,
+      buttonColor: colors.blue2,
     },
   },
 });
