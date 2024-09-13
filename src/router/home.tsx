@@ -36,7 +36,7 @@ export default function EmotionMain() {
   };
 
   return (
-    <Box p={5} bgColor="mainBg">
+    <Box p={5} bgColor="mainBg" h="100vh">
       <Flex direction="column" gap="10px">
         <Container p={0}>
           <MainCalendar
@@ -46,14 +46,14 @@ export default function EmotionMain() {
           />
         </Container>
         <HStack spacing="9px">
-          <DiaryButton onClick={handleTrash} icon={<IconPen />}>
+          <DiaryButton onClick={handleDiary} icon={<IconPen />}>
             <Flex>
               <Text lineHeight={"25px"}>일기 쓰기</Text>
               <RightArrowIcon />
             </Flex>
           </DiaryButton>
           <DiaryButton
-            onClick={handleDiary}
+            onClick={handleTrash}
             color="white"
             icon={<IconTrashCan />}
           >
