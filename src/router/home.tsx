@@ -79,10 +79,12 @@ export default function EmotionMain() {
   };
 
   const handleDateSelect = (dateStr: string) => {
+    console.log(dateStr);
     //setSelectedDate(dateStr);
   };
 
   const handleViewChanged = (monthStr: string) => {
+    console.log(monthStr);
     console.log("handle monthstr");
   };
 

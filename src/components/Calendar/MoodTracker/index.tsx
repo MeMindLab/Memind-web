@@ -27,7 +27,7 @@ const EmotionBox = ({ score, change }: EmotionBoxProps) => {
       boxShadow="0px 4px 4px rgba(212, 215, 225, 0.23)"
       p={4} // 패딩 추가
     >
-      <Flex justifyContent="space-between" alignItems="center">
+      <Flex justifyContent="space-between">
         <Flex direction="column">
           <Text fontSize="16px" fontWeight="bold" color="#313131">
             이번주 감정 수치
