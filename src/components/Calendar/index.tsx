@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import {
   Box,
   Button,
@@ -11,7 +12,6 @@ import {
 import {
   IconCalChevronLeft,
   IconCalChevronRight,
-  IconCalChevronBelow,
   IconHappy,
   IconJoyful,
   IconSad,
@@ -36,6 +36,7 @@ type Props = {
   onDateSelect(dateStr: string): void;
   onViewChange?: (monthStr: string) => void;
   activeDates?: ActiveDate[];
+  token?: string;
 };
 
 export const MainCalendar = ({
@@ -43,6 +44,7 @@ export const MainCalendar = ({
   onDateSelect,
   activeDates,
   onViewChange,
+  token,
 }: Props) => {
   const { dates, handlers, monthStr, dayStrs } = useCalendar({
     initialDateStr,
@@ -51,7 +53,32 @@ export const MainCalendar = ({
     onViewChange,
   });
 
-  console.log(dayStrs);
+  //const [conversations, setConversations] = useState([]);
+
+  // 월간 대화 내용 가져오기
+  const fetchConversations = async (year: number, month: number) => {
+    if (!token) return; // token이 없으면 요청하지 않음
+    console.log(`Fetching conversations for year: ${year}, month: ${month}`);
+    try {
+      console.log(token);
+      const response = await axios.get(
+        `https://backend-wandering-glitter-8053.fly.dev/chat/monthly-conversations`,
+        {
+          params: { year, month },
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      //setConversations(response.data.conversations);
+    } catch (error) {
+      console.error("Error fetching conversations:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (token) {
+      fetchConversations(2024, 9); // or use viewDate to dynamically fetch
+    }
+  }, [token]);
 
   return (
     <Box
@@ -59,16 +86,19 @@ export const MainCalendar = ({
       padding={0}
       borderRadius={13}
       bg="white"
-      shadow="0px 4px 4px 0px rgba(212, 215, 225, 0.23)"
+      boxShadow="0px 4px 4px 0px rgba(212, 215, 225, 0.23)"
     >
       <SCalendar spacing={0} p={0} m={0}>
         <Box py="14px" px="19px" paddingLeft="18px">
           <Flex justify="space-between">
             <Button
+              w="103px"
               h="36px"
               py="7px"
-              paddingLeft="9px"
               borderRadius={50}
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
               bg={"buttonColor"}
               sx={{
                 _hover: {
@@ -79,7 +109,6 @@ export const MainCalendar = ({
               <Text fontWeight={600} marginRight="4px" color="#626262">
                 {monthStr}
               </Text>
-              <IconCalChevronBelow />
             </Button>
 
             <HStack spacing={2}>
@@ -137,7 +166,7 @@ export const MainCalendar = ({
         </Stack>
 
         {dates.map((week, i) => {
-          console.log("Week:", week);
+          //console.log("Week:", week);
           return (
             <Flex
               key={i}

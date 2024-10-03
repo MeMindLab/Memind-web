@@ -45,7 +45,6 @@ export const useCalendar = (options: Options) => {
   const [viewDate, setViewDate] = useState<Dayjs>(dayjs(initialDateStr));
 
   const today = useMemo(() => dayjs(), []);
-  console.log(today);
 
   const startOfWeeks = useMemo(
     () => dayjs(viewDate).startOf("M").startOf("w"),
