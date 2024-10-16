@@ -73,7 +73,6 @@ export const useCalendar = (options: Options) => {
 
         const emotion = activeDates?.find((ad) => ad.date === iso)?.emotion; // Assuming activeDates has emotion
         const activeDate = activeDates?.find((ad) => ad.date === iso);
-
         const active = !!activeDate;
 
         week.push({
