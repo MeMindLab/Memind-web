@@ -13,7 +13,7 @@ type CalendarEntity = {
 
 export const useHome = () => {
   const [dateStr, setDateStr] = useState(dayjs().format("YYYY-MM-DD"));
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [conversations, setConversations] = useState<CalendarEntity[]>([]);
@@ -46,6 +46,7 @@ export const useHome = () => {
   };
 
   const getToken = () => {
+    setLoading(true);
     if (window && window.flutter_inappwebview) {
       window.flutter_inappwebview
         .callHandler("requestToken", "Tokenhandler")
